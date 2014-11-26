@@ -1,0 +1,11 @@
+# /etc/beaver/beaver.conf
+[beaver]
+logstash_version: 1
+rabbitmq_host: {{ rabbitmq_vip }}
+rabbitmq_vhost: /logstash
+rabbitmq_queue: logstash-queue
+rabbitmq_exchange_durable: 1
+rabbitmq_key: logstash-key
+rabbitmq_exchange: logstash-rabbitmq
+rabbitmq_username: {{ rabbitmq_user_logstash }}
+rabbitmq_password: {{ rabbitmq_password_logstash }}

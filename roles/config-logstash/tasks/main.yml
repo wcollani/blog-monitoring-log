@@ -1,0 +1,8 @@
+---
+   - name: Install input.conf.j2 
+     template: src=input.conf.j2 dest=/etc/logstash/conf.d/input.conf owner=root group=logstash mode=0440
+     notify: restart logstash
+
+   - name: Install output.conf.j2
+     template: src=output.conf.j2 dest=/etc/logstash/conf.d/output.conf owner=root group=logstash mode=0440
+     notify: restart logstash

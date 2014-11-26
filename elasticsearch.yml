@@ -1,0 +1,17 @@
+---
+- hosts: elasticsearch
+  sudo: yes
+  gather_facts: yes
+
+  vars:
+    instance_roles:
+        - base
+  
+  roles:
+    - common
+    - install-elasticsearch
+    - config-elasticsearch
+    - install-sensu-client
+    - config-sensu-client
+    - install-beaver
+    - config-beaver

@@ -1,0 +1,18 @@
+{
+  "checks": {
+    "logstash-agent-check": {
+      "type": "metric",
+      "command": "/etc/sensu/plugins/base/check-procs.rb -p 'logstash/runner.rb agent' -C 1 ",
+      "interval": 60,
+      "subscribers": [ "logstash" ],
+      "handlers": [ "default" ]
+    },
+    "logstash-web-check": {
+      "type": "metric",
+      "command": "/etc/sensu/plugins/base/check-procs.rb -p 'logstash/runner.rb web' -C 1 ",
+      "interval": 60,
+      "subscribers": [ "logstash" ],
+      "handlers": [ "default" ]
+    }
+  }
+}

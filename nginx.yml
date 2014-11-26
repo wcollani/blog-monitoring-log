@@ -1,0 +1,18 @@
+---
+- hosts: nginx
+  user: vagrant
+  sudo: yes
+  gather_facts: yes
+
+  vars:
+    instance_roles: 
+        - base
+        - nginx
+
+  roles:
+    - common
+    - nginx
+    - install-sensu-client
+    - config-sensu-client
+    - install-beaver
+    - config-beaver

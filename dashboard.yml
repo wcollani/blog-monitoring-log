@@ -1,0 +1,17 @@
+---
+- hosts: dashboard
+  sudo: yes
+  gather_facts: yes
+
+  vars:
+    instance_roles: 
+        - base
+        - nginx
+  roles:
+    - common
+    - nginx
+    - install-kibana
+    - install-sensu-client
+    - config-sensu-client
+    - install-beaver
+    - config-beaver 

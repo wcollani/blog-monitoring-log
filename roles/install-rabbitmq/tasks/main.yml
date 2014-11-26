@@ -1,0 +1,21 @@
+---
+   - name: Install Rabbitmq
+     apt: pkg=rabbitmq-server={{ rabbitmq_version}} state=present update_cache=yes cache_valid_time=3600
+
+   - name: Stop rabbitmq
+     service: name=rabbitmq-server state=stopped
+ 
+   - name: Fetch Erlang Cookie for cluster
+     copy: src=erlang.cookie dest=/var/lib/rabbitmq/.erlang.cookie owner=rabbitmq group=rabbitmq mode=400
+ 
+   - name: Fetch config
+     template: src=rabbitmq.config.j2 dest=/etc/rabbitmq/rabbitmq.config owner=root group=root mode=644
+   
+   - name: Remove mnesia
+     shell: rm -rf /var/lib/rabbitmq/mnesia/   
+   
+   - name: enable rabbitmq plugins
+     rabbitmq_plugin: names=rabbitmq_management,rabbitmq_tracing,rabbitmq_federation state=enabled
+
+   - name: Start rabbitmq
+     service: name=rabbitmq-server state=started enabled=yes

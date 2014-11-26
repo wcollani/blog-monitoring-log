@@ -1,0 +1,3 @@
+[/var/log/rabbitmq/*.log]
+type: beaver:rabbitmq
+tags: beaver-logs

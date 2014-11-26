@@ -1,0 +1,18 @@
+---
+- hosts: logstash
+  sudo: yes
+  gather_facts: yes
+
+  vars:
+    instance_roles: 
+        - base
+        - logstash
+
+  roles:
+    - common
+    - install-logstash
+    - config-logstash
+    - install-sensu-client
+    - config-sensu-client
+    - install-beaver
+    - config-beaver

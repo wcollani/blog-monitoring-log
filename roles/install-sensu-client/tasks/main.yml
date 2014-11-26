@@ -1,0 +1,26 @@
+---
+   - name: Add sensu repo key
+     apt_key: id=7580C77F url=http://repos.sensuapp.org/apt/pubkey.gpg state=present
+
+   - name: Add repo to apt list
+     apt_repository: repo='deb http://repos.sensuapp.org/apt sensu main' state=present
+
+   - name: Install sensu package
+     apt: pkg=sensu={{ sensu_package_version }} update_cache=yes cache_valid_time=3600
+
+   - name: sensu checks directory
+     file: dest=/etc/sensu/conf.d/checks state=directory owner=root mode=0755
+
+   - name: sensu cert directory
+     file: dest=/etc/sensu/ssl state=directory owner=root group=sensu mode=0750
+
+   - name: install sensu cert
+     copy: content={{ sensu_client_cert }} dest=/etc/sensu/ssl/cert.pem owner=root group=sensu mode=0440
+     notify: restart sensu-client
+
+   - name: install sensu key
+     copy: content={{ sensu_client_key }} dest=/etc/sensu/ssl/key.pem owner=root group=sensu mode=0440
+     notify: restart sensu-client
+
+   - name: Enable sensu client
+     service: name=sensu-client enabled=yes 

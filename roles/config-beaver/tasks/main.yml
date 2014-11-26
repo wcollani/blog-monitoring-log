@@ -1,0 +1,12 @@
+---
+   - name: Install Beaver config
+     template: src=beaver.conf.j2 dest=/etc/beaver/beaver.conf owner=root group=beaver mode=644
+     notify: restart beaver
+
+   - name: Install Beaver log file config using instance_roles variable
+     copy: src={{ item }} dest=/etc/beaver/conf.d/ owner=root group=beaver mode=0644
+     with_items: instance_roles
+     notify: restart beaver
+
+   - name: add beaver user to adm group for logs
+     user: name=beaver groups=adm append=yes

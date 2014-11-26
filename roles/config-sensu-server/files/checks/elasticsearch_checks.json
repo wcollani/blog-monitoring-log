@@ -1,0 +1,11 @@
+{
+  "checks": {
+    "elasticsearch-check": {
+      "type": "metric",
+      "command": "/etc/sensu/plugins/base/check-procs.rb -p elasticsearch.pid -C 1 ",
+      "interval": 60,
+      "subscribers": [ "elasticsearch" ],
+      "handlers": [ "default" ]
+    }
+  }
+}

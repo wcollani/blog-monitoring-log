@@ -1,0 +1,20 @@
+[nginx]
+192.168.33.40
+
+[sensu-server]
+192.168.33.70
+
+[rabbitmq]
+192.168.33.60 rabbit_type=disc
+
+[redis]
+192.168.33.50
+
+[logstash]
+192.168.33.80
+
+[elasticsearch]
+192.168.33.90
+
+[dashboard]
+192.168.33.110

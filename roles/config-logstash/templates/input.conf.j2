@@ -1,0 +1,12 @@
+input {
+ rabbitmq {
+    queue => "logstash-queue"
+    vhost => "/logstash"
+    host => "{{ rabbitmq_vip }}"
+    user => "{{ rabbitmq_user_logstash }}"
+    password => "{{ rabbitmq_password_logstash }}"
+    key => "logstash-key"
+    exchange => "logstash-exchange" 
+    type => "direct"
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "handlers" :{
+        "default": {
+		"type": "set",
+		"handlers": ["logstash-checks", "flapjack" ]
+		},
+  	"logstash-checks": {
+    		"type": "pipe",
+   		"command": "/etc/sensu/handlers/logstash-checks.rb"
+  		},
+        "logstash-metrics": {
+                "type": "pipe",
+                "command": "/etc/sensu/handlers/logstash-metrics.rb"
+                }
+	}
+}

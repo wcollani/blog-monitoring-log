@@ -1,0 +1,13 @@
+---
+   - name: Create logstash vhost on rabbitmq
+     rabbitmq_vhost: name=/logstash state=present
+
+   - name: Create logstash user on rabbitmq
+     rabbitmq_user: user={{ rabbitmq_user_logstash }}
+                 password={{ rabbitmq_password_logstash }}
+                 vhost=/logstash
+                 tags=Monitoring
+                 configure_priv=.*
+                 read_priv=.*
+                 write_priv=.*
+                 state=present

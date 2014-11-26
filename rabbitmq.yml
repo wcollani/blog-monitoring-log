@@ -1,0 +1,20 @@
+---
+- hosts: rabbitmq
+  sudo: yes
+  gather_facts: yes
+  serial: 1
+  
+  vars:
+    instance_roles:
+        - base
+        - rabbitmq
+
+  roles:
+    - common
+    - install-rabbitmq
+    - sensu-rabbitmq-config
+    - logstash-rabbitmq-config
+    - install-sensu-client
+    - config-sensu-client
+    - install-beaver
+    - config-beaver

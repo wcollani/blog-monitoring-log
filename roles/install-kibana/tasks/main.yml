@@ -1,0 +1,26 @@
+---
+   - name: Extract kibana to /usr/share
+     unarchive: src=kibana-3.1.1.tar.gz dest=/usr/share/
+
+   - name: Change ownership of kibana directory to www-data
+     file: path=/usr/share/kibana-3.1.1 state=directory recurse=yes owner=www-data group=www-data mode=0755
+
+   - name: Create kibana symlink for extracted kibana-<version> directory
+     file: src=/usr/share/kibana-3.1.1 dest=/usr/share/kibana state=link owner=www-data group=www-data
+
+   - name: Create conf.js
+     template: src=config.js.j2 dest=/usr/share/kibana/config.js owner=www-data group=www-data mode=0755
+
+#   - name: Backup default.json & cp logstash.json to default.json
+#     command: mv /usr/share/kibana/app/dashboards/default.json /usr/share/kibana/app/dashboards/default.json.bak 
+#     command: cp /usr/share/kibana/app/dashboards/logstash.json /usr/share/kibana/app/dashboards/default.json
+
+   - name: Create nginx kibana.conf
+     template: src=kibana.conf.j2 dest=/etc/nginx/sites-available/kibana.conf owner=www-data group=www-data mode=0660
+     notify:
+     - restart nginx
+
+   - name: Create sym link to sites-enabled
+     file: src=/etc/nginx/sites-available/kibana.conf dest=/etc/nginx/sites-enabled/kibana.conf owner=www-data group=www-data state=link
+     notify:
+     - restart nginx

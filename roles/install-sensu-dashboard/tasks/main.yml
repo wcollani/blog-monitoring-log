@@ -1,0 +1,16 @@
+---
+   - name: Add sensu repo key
+     apt_key: id=7580C77F url=http://repos.sensuapp.org/apt/pubkey.gpg state=present
+
+   - name: Add repo to apt list
+     apt_repository: repo='deb http://repos.sensuapp.org/apt sensu main' state=present
+
+   - name: Install uchiwa
+     apt: pkg=uchiwa={{ uchiwa_version }} update_cache=yes cache_valid_time=3600   
+
+   - name: install uchiwa config
+     template: src=uchiwa.json.j2 dest=/etc/sensu/uchiwa.json owner=root group=sensu mode=0440
+     notify: restart uchiwa
+
+   - name: Enable uchiwa
+     service: name=uchiwa enabled=yes state=started

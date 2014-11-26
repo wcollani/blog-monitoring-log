@@ -1,0 +1,11 @@
+{
+  "checks": {
+    "redis-check": {
+      "type": "metric",
+      "command": "/etc/sensu/plugins/base/check-procs.rb -p redis -C 1 ",
+      "interval": 60,
+      "subscribers": [ "redis" ],
+      "handlers": [ "default" ]
+    }
+  }
+}

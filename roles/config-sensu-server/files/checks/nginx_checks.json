@@ -1,0 +1,18 @@
+{
+  "checks": {
+    "nginx-check": {
+      "type": "metric",
+      "command": "/etc/sensu/plugins/base/check-procs.rb -p nginx -C 1 ",
+      "interval": 60,
+      "subscribers": [ "nginx" ],
+      "handlers": [ "default" ]
+    },
+    "check-http-localhost": {
+      "type": "metric",
+      "command": "/etc/sensu/plugins/nginx/check-http.rb -u http://localhost",
+      "interval": 60,
+      "subscribers": [ "nginx" ],
+      "handlers": [ "default" ]
+    }
+  }
+}

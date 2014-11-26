@@ -1,0 +1,3 @@
+---
+cluster_config: ['rabbit@rmq-node0']
+rabbitmq_version: 3.2.4-1

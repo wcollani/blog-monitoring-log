@@ -1,0 +1,4 @@
+---
+   - name: install redis config
+     template: src=redis.conf.j2 dest=/etc/redis/redis.conf owner=root group=redis mode=0440
+     notify: restart redis-server

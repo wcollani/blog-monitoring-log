@@ -1,0 +1,7 @@
+[/var/log/sensu/sensu-api.log]
+type: beaver:sensu
+tags: beaver-logs
+
+[/var/log/sensu/sensu-server.log]
+type: beaver:sensu
+tags: beaver-logs

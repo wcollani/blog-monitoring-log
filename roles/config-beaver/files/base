@@ -1,0 +1,15 @@
+[/var/log/syslog]
+type: beaver:base 
+tags: beaver-logs
+
+[/var/log/dmesg]
+type: beaver:base
+tags: beaver-logs
+
+[/var/log/apt/*log]
+type: beaver:base
+tags: beaver-logs
+
+[/var/log/sysstat/*]
+type: beaver:base
+tags: beaver-logs

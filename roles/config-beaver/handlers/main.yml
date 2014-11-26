@@ -1,0 +1,3 @@
+---
+   - name: restart beaver
+     service: name=beaver state=restarted

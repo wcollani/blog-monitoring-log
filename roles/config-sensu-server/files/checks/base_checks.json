@@ -1,0 +1,46 @@
+{
+  "checks": {
+    "cron-check": {
+      "type": "metric",
+      "command": "/etc/sensu/plugins/base/check-procs.rb -p cron -C 1 ",
+      "interval": 60,
+      "subscribers": [ "base" ],
+      "handlers": ["default"]
+    },
+    "ntp-check": {
+      "type": "metric",
+      "command": "/etc/sensu/plugins/base/check-procs.rb -p ntp -C 1 ",
+      "interval": 60,
+      "subscribers": [ "base" ],
+      "handlers": ["default"]
+    },
+    "disk-Free": {
+       "type": "metric",
+       "command": "/etc/sensu/plugins/base/check-disk.rb -w 90 -c 95",
+       "interval": 60,
+       "subscribers": [ "base" ],
+       "handlers": ["default"]
+    },
+    "cpu-load": { 
+       "type": "metric",
+       "command": "/etc/sensu/plugins/base/check-cpu.rb -w 90 -c 95",
+       "interval": 60,
+       "subscribers": [ "base" ],
+       "handlers": ["default"]
+    },
+    "swap-usage": { 
+       "type": "metric",
+       "command": "/etc/sensu/plugins/base/check-swap-percentage.sh -w 50 -c 80",
+       "interval": 60,
+       "subscribers": [ "base" ],
+       "handlers": ["default"]
+    },
+    "ntp-time": {
+       "type": "metric",
+       "command": "/etc/sensu/plugins/base/check-ntp.rb -w 10 -c 30",
+       "interval": 60,
+       "subscribers": [ "base" ],
+       "handlers": ["default"]
+    }
+  }
+}

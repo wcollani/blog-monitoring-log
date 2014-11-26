@@ -1,0 +1,3 @@
+---
+   - name: restart uchiwa
+     service: name=uchiwa state=restarted sleep=2

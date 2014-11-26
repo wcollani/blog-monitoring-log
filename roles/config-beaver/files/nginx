@@ -1,0 +1,3 @@
+[/var/log/nginx/*log]
+type: beaver:nginx
+tags: beaver-logs

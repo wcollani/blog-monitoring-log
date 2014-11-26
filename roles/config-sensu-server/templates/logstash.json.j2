@@ -1,0 +1,16 @@
+{
+    "logstash-checks": {
+    		"server": "{{ redis_vip }}",
+    		"port": 6379,
+    		"list": "sensuchecks",
+    		"type": "sensu:checks",
+    		"output": "redis"
+  		},
+     "logstash-metrics": {
+                "server": "{{ redis_vip }}",
+                "port": 6379,
+                "list": "sensumetrics",
+                "type": "sensu:metrics",
+                "output": "redis"
+                }
+}

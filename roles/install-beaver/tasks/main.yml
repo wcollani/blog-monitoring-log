@@ -1,0 +1,25 @@
+---
+   - name: Install Pip
+     apt: pkg=python-pip state=latest update_cache=yes cache_valid_time=3600
+
+   - name: Install Beaver
+     pip: name=beaver version={{ beaver_version }}
+
+   - name: Create Beaver group 
+     group: name=beaver state=present system=yes
+    
+   - name: Create Beaver user
+     user: name=beaver state=present group=beaver system=yes
+
+   - name: Make sure that the beaver etc directories exsist
+     file: path=/etc/beaver/conf.d state=directory
+
+   - name: Install Beaver init script
+     copy: src=beaver.init.d dest=/etc/init.d/beaver owner=root group=root mode=755
+
+   - name: Install Beaver config
+     template: src=beaver.conf.j2 dest=/etc/beaver/beaver.conf owner=root group=beaver mode=644
+     notify: restart beaver
+
+   - name: Enable Beaver
+     service: name=beaver enabled=yes state=started

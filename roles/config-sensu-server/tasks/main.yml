@@ -1,0 +1,51 @@
+---
+   - name: install sensu cert
+     copy: content={{ sensu_client_cert }} dest=/etc/sensu/ssl/cert.pem owner=root group=sensu mode=0440
+     notify: restart sensu-server
+
+   - name: install sensu key
+     copy: content={{ sensu_client_key }} dest=/etc/sensu/ssl/key.pem owner=root group=sensu mode=0440
+     notify: restart sensu-server
+
+   - name: install rabbitmq config
+     template: src=rabbitmq.json.j2 dest=/etc/sensu/conf.d/rabbitmq.json owner=root group=sensu mode=0440
+     notify: restart sensu-server
+
+   - name: install redis config
+     template: src=redis.json.j2 dest=/etc/sensu/conf.d/redis.json owner=root group=sensu mode=0440
+     notify: restart sensu-server
+   
+   - name: install api config
+     template: src=api.json.j2 dest=/etc/sensu/conf.d/api.json owner=root group=sensu mode=0440
+     notify: restart sensu-server
+
+   - name: install handler config
+     template: src=handlers.json.j2 dest=/etc/sensu/conf.d/handlers.json owner=root group=sensu mode=0440
+     notify: restart sensu-server
+
+   - name: Copy check configs
+     copy: src=checks dest=/etc/sensu/conf.d/
+     notify: restart sensu-server
+
+   - name: Copy handlers 
+     copy: src=handlers dest=/etc/sensu/ mode=0755
+     notify: restart sensu-server
+   
+   - name: Copy handlers extensions
+     copy: src=extensions/handlers dest=/etc/sensu/extensions/ mode=0755
+     notify: restart sensu-server
+
+   - name: Install handler config
+     template: src=logstash.json.j2 dest=/etc/sensu/conf.d/logstash.json owner=root group=sensu mode=0440
+     notify: restart sensu-server
+
+   - name: Install gems to extend sensu embedded ruby
+     command: /opt/sensu/embedded/bin/gem install {{ item }}
+     with_items:
+     - redis
+
+   - name: Enable sensu server
+     service: name={{ item }} enabled=yes state=started
+     with_items:
+     - sensu-server
+     - sensu-api

@@ -1,0 +1,3 @@
+[/opt/data/elasticsearch/log/*log]
+type: beaver:elasticsearch
+tags: beaver-logs

@@ -1,0 +1,17 @@
+---
+   - name: Install check scripts based on roles using instance_roles variable
+     copy: src={{ item }} dest=/etc/sensu/plugins/ mode=0755
+     with_items: instance_roles
+     notify: restart sensu-client
+
+   - name: install client config
+     template: src=client.json.j2 dest=/etc/sensu/conf.d/client.json owner=root group=sensu mode=0440
+     notify: restart sensu-client
+
+   - name: Sensu to use embedded ruby
+     copy: src=default.sensu dest=/etc/default/sensu owner=root group=sensu mode=0644
+     notify: restart sensu-client
+
+   - name: install rabbitmq config
+     template: src=rabbitmq.json.j2 dest=/etc/sensu/conf.d/rabbitmq.json owner=root group=sensu mode=0440
+     notify: restart sensu-client

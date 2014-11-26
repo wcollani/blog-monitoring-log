@@ -1,0 +1,18 @@
+---
+- hosts: redis
+  sudo: yes
+  gather_facts: yes
+  serial: 1
+
+  vars:
+    instance_roles:
+        - base
+  
+  roles:
+    - common
+    - install-redis
+    - sensu-redis-config
+    - install-sensu-client
+    - config-sensu-client
+    - install-beaver
+    - config-beaver

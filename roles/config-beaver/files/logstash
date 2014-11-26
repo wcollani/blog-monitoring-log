@@ -1,0 +1,3 @@
+[/var/log/logstash/logstash.log]
+type: beaver:logstash
+tags: beaver-logs

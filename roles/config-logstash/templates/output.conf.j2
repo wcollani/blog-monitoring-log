@@ -1,0 +1,10 @@
+output {
+  elasticsearch {
+    host => "{{ elasticsearch_vip }}"
+    cluster => "{{ elasticsearch_cluster_name }}"
+    protocol => "transport"
+  }
+  file {
+    path => "/var/log/logstash/output.log"
+  }
+}

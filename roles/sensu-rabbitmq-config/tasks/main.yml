@@ -1,0 +1,13 @@
+---
+   - name: Create sensu vhost on rabbitmq
+     rabbitmq_vhost: name=/sensu state=present
+
+   - name: Create sensu user on rabbitmq
+     rabbitmq_user: user={{ rabbitmq_user_sensu }}
+                 password={{ rabbitmq_password_sensu }}
+                 vhost=/sensu
+                 tags=Monitoring
+                 configure_priv=.*
+                 read_priv=.*
+                 write_priv=.*
+                 state=present

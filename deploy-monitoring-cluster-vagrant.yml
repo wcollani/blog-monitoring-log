@@ -1,0 +1,14 @@
+---
+- hosts: all
+  user: vagrant
+  sudo: yes
+  gather_facts: yes
+  
+- include: rabbitmq.yml
+- include: redis.yml
+- include: sensu-server.yml
+- include: logstash.yml
+- include: elasticsearch.yml
+- include: dashboard.yml
+- include: nginx.yml
+
